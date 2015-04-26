@@ -1,23 +1,36 @@
 package org.iit.workshopscrum.plangarde.model;
 
-import java.util.Date;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PlanningGarde {
 
-	private Map<Date, Doctor> planning;
+	private List<Garde> gardeList;
 
-	public PlanningGarde(Map<Date, Doctor> planning) {
+	public PlanningGarde(List<Garde> gardeList) {
 		super();
-		this.planning = planning;
+		this.gardeList = gardeList;
 	}
 
-	public Map<Date, Doctor> getPlanning() {
-		return planning;
+	public PlanningGarde() {
+		super();
 	}
 
-	public void setPlanning(Map<Date, Doctor> planning) {
-		this.planning = planning;
+	public List<Garde> getGardeList() {
+		if (gardeList == null) {
+			gardeList = new ArrayList<Garde>();
+		}
+		return gardeList;
 	}
-	
+
+	public void setGardeList(List<Garde> gardeList) {
+		this.gardeList = gardeList;
+	}
+
+	public void addGarde(Garde garde) {
+		if (gardeList == null) {
+			gardeList = new ArrayList<Garde>();
+		}
+		gardeList.add(garde);
+	}
 }

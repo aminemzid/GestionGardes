@@ -5,13 +5,18 @@ import java.util.List;
 public class Doctor {
 
 	private String name;
-	
+
 	private List<Holiday> holidays;
 
 	public Doctor(String name, List<Holiday> holidays) {
 		super();
 		this.name = name;
 		this.holidays = holidays;
+	}
+
+	public Doctor(String name) {
+		super();
+		this.name = name;
 	}
 
 	public String getName() {
@@ -29,5 +34,5 @@ public class Doctor {
 	public void setHolidays(List<Holiday> holidays) {
 		this.holidays = holidays;
 	}
-	
+
 }
