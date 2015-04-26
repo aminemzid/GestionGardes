@@ -1,6 +1,5 @@
 package org.iit.workshopscrum.plangarde.model;
 
-import java.util.Date;
 import java.util.List;
 
 public class Doctor {
