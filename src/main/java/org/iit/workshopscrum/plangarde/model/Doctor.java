@@ -7,9 +7,9 @@ public class Doctor {
 
 	private String name;
 	
-	private List<Date> holidays;
+	private List<Holiday> holidays;
 
-	public Doctor(String name, List<Date> holidays) {
+	public Doctor(String name, List<Holiday> holidays) {
 		super();
 		this.name = name;
 		this.holidays = holidays;
@@ -23,11 +23,11 @@ public class Doctor {
 		this.name = name;
 	}
 
-	public List<Date> getHolidays() {
+	public List<Holiday> getHolidays() {
 		return holidays;
 	}
 
-	public void setHolidays(List<Date> holidays) {
+	public void setHolidays(List<Holiday> holidays) {
 		this.holidays = holidays;
 	}
 	
