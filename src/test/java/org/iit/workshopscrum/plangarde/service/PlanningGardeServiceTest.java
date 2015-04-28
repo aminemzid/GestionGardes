@@ -80,8 +80,10 @@ public class PlanningGardeServiceTest {
 
 		// Inputs
 		List<Doctor> doctors = new ArrayList<Doctor>();
-		doctors.add(new Doctor("Mohamed"));
-		doctors.add(new Doctor("Salah"));
+		Doctor doctor1 = new Doctor("Mohamed");
+		doctors.add(doctor1);
+		Doctor doctor2 = new Doctor("Salah");
+		doctors.add(doctor2);
 		Date startDate = new Date();
 		Date endDate = DateUtils.addDays(startDate, 10);
 
@@ -94,7 +96,8 @@ public class PlanningGardeServiceTest {
 
 		// Assertion
 		assertEquals(10, planningGarde.getGardeList().size());
-		// TODO ajouter assertions sur le nombre de garde de chaque doctor
+		assertEquals(numberOfGardeForEachDoctor.get(doctor1).intValue(), 5);
+		assertEquals(numberOfGardeForEachDoctor.get(doctor2).intValue(), 5);
 	}
 
 }
