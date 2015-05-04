@@ -18,6 +18,43 @@ public class PlanningGardeServiceTest {
 
 	private PlanningGardeService planningGardeService = new PlanningGardeService();
 
+	@Test(expected = IllegalArgumentException.class)
+	public void test_generatePlanning_CaseStartDateNull() throws ImpossibleToPlan {
+
+		// Inputs
+		List<Doctor> doctors = new ArrayList<Doctor>();
+		Date startDate = null;
+		Date endDate = new Date();
+
+		// Call method under test
+		planningGardeService.generatePlanningGarde(doctors, startDate, endDate);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void test_generatePlanning_CaseEndDateNull() throws ImpossibleToPlan {
+
+		// Inputs
+		List<Doctor> doctors = new ArrayList<Doctor>();
+		Date startDate = new Date();
+		Date endDate = null;
+
+		// Call method under test
+		planningGardeService.generatePlanningGarde(doctors, startDate, endDate);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void test_generatePlanning_CaseEndDateBeforeStartDate() throws ImpossibleToPlan {
+
+		// Inputs
+		List<Doctor> doctors = new ArrayList<Doctor>();
+		doctors.add(new Doctor("Mohamed"));
+		Date startDate = new Date();
+		Date endDate = DateUtils.addDays(startDate, -1);
+
+		// Call method under test
+		planningGardeService.generatePlanningGarde(doctors, startDate, endDate);
+	}
+
 	@Test(expected = ImpossibleToPlan.class)
 	public void test_generatePlanning_CaseZeroDoctorAndOneDayPeriod() throws ImpossibleToPlan {
 
@@ -27,9 +64,7 @@ public class PlanningGardeServiceTest {
 		Date endDate = new Date();
 
 		// Call method under test
-		PlanningGarde planningGarde = planningGardeService.generatePlanningGarde(doctors, startDate, endDate);
-
-		// Assertion
+		planningGardeService.generatePlanningGarde(doctors, startDate, endDate);
 	}
 
 	@Test

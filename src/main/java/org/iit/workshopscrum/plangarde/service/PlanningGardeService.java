@@ -11,18 +11,19 @@ import org.apache.commons.lang.time.DateUtils;
 import org.iit.workshopscrum.plangarde.model.Doctor;
 import org.iit.workshopscrum.plangarde.model.Garde;
 import org.iit.workshopscrum.plangarde.model.ImpossibleToPlan;
+import org.iit.workshopscrum.plangarde.model.ImpossibleToPlanEnum;
 import org.iit.workshopscrum.plangarde.model.PlanningGarde;
 
 public class PlanningGardeService {
 
 	public PlanningGarde generatePlanningGarde(List<Doctor> doctors, Date startDate, Date endDate) throws ImpossibleToPlan {
 
-		if (doctors == null || startDate == null || endDate == null) {
-			throw new IllegalArgumentException("Paramètres incorrectes");
+		if (startDate == null || endDate == null) {
+			throw new IllegalArgumentException("Wrong arguments startDate/endDate");
 		}
 
-		if (doctors.isEmpty()) {
-			throw new ImpossibleToPlan();
+		if (doctors == null || doctors.isEmpty()) {
+			throw new ImpossibleToPlan(ImpossibleToPlanEnum.NEED_AT_LEAST_ONE_DOCTOR);
 		}
 
 		resetHourMinuteSecondeMilliseconde(startDate);
@@ -30,7 +31,7 @@ public class PlanningGardeService {
 
 		// startDate must be strictly less than endDate
 		if (startDate.after(endDate)) {
-			throw new IllegalArgumentException("Paramètres incorrectes");
+			throw new IllegalArgumentException("Wrong arguments startDate/endDate");
 		}
 
 		// Result to be returned
