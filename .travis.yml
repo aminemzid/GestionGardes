@@ -1,1 +1,6 @@
 language: java
+
+notifications:
+  email:
+    recipients:
+      - amine.mzid@gmail.com
