@@ -135,4 +135,10 @@ public class PlanningGardeServiceTest {
 		assertEquals(numberOfGardeForEachDoctor.get(doctor2).intValue(), 5);
 	}
 
+	@Test
+	public void test_echec() throws ImpossibleToPlan {
+		// Assertion
+		assertEquals(1, 2);
+	}
+
 }
