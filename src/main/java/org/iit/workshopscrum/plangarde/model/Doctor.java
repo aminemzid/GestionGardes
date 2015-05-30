@@ -1,17 +1,26 @@
 package org.iit.workshopscrum.plangarde.model;
 
-import java.util.List;
+import java.util.Set;
 
 public class Doctor {
 
 	private String name;
 
-	private List<Holiday> holidays;
+	private Set<Holiday> holidays;
 
-	public Doctor(String name, List<Holiday> holidays) {
+	private Set<DayWeek> preferredGardeDays;
+
+	public Doctor(String name, Set<Holiday> holidays) {
 		super();
 		this.name = name;
 		this.holidays = holidays;
+	}
+
+	public Doctor(String name, Set<Holiday> holidays, Set<DayWeek> preferredGardeDays) {
+		super();
+		this.name = name;
+		this.holidays = holidays;
+		this.preferredGardeDays = preferredGardeDays;
 	}
 
 	public Doctor(String name) {
@@ -27,12 +36,20 @@ public class Doctor {
 		this.name = name;
 	}
 
-	public List<Holiday> getHolidays() {
+	public Set<Holiday> getHolidays() {
 		return holidays;
 	}
 
-	public void setHolidays(List<Holiday> holidays) {
+	public void setHolidays(Set<Holiday> holidays) {
 		this.holidays = holidays;
+	}
+
+	public Set<DayWeek> getPreferredGardeDays() {
+		return preferredGardeDays;
+	}
+
+	public void setPreferredGardeDays(Set<DayWeek> preferredGardeDays) {
+		this.preferredGardeDays = preferredGardeDays;
 	}
 
 }
