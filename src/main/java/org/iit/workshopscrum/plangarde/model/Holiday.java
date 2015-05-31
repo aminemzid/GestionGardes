@@ -1,33 +1,44 @@
 package org.iit.workshopscrum.plangarde.model;
 
-import java.util.Date;
+import org.joda.time.LocalDate;
+
+import com.sun.istack.internal.NotNull;
 
 public class Holiday {
 
-	private Date startDate;
+	@NotNull
+	private LocalDate startDate;
 
-	private Date endDate;
+	@NotNull
+	private LocalDate endDate;
 
-	public Holiday(Date startDate, Date endDate) {
+	// TODO Add validation startDate < endDate
+	public Holiday(LocalDate startDate, LocalDate endDate) {
 		super();
+		validateDates(startDate, endDate);
 		this.startDate = startDate;
 		this.endDate = endDate;
+
 	}
 
-	public Date getStartDate() {
+	private void validateDates(LocalDate startDate, LocalDate endDate) {
+		if (startDate == null || endDate == null) {
+			throw new IllegalArgumentException("Wrong arguments startDate/endDate");
+		}
+		// startDate must be strictly less than endDate
+		if (startDate.isAfter(endDate)) {
+			throw new IllegalArgumentException("Wrong arguments startDate/endDate");
+		}
+
+	}
+
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-
-	public Date getEndDate() {
+	@NotNull
+	public LocalDate getEndDate() {
 		return endDate;
-	}
-
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
 	}
 
 }

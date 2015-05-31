@@ -1,5 +1,6 @@
 package org.iit.workshopscrum.plangarde.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class Doctor {
@@ -8,6 +9,7 @@ public class Doctor {
 
 	private Set<Holiday> holidays;
 
+	// TODO not used for the moment
 	private Set<DayWeek> preferredGardeDays;
 
 	public Doctor(String name, Set<Holiday> holidays) {
@@ -37,6 +39,9 @@ public class Doctor {
 	}
 
 	public Set<Holiday> getHolidays() {
+		if (holidays == null) {
+			holidays = new HashSet<Holiday>();
+		}
 		return holidays;
 	}
 

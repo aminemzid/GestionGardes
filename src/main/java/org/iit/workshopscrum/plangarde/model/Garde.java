@@ -1,24 +1,24 @@
 package org.iit.workshopscrum.plangarde.model;
 
-import java.util.Date;
+import org.joda.time.LocalDate;
 
 public class Garde {
 
-	private Date dateGarde;
+	private LocalDate dateGarde;
 
 	private Doctor doctorGarde;
 
-	public Garde(Date dateGarde, Doctor doctorGarde) {
+	public Garde(LocalDate dateGarde, Doctor doctorGarde) {
 		super();
 		this.dateGarde = dateGarde;
 		this.doctorGarde = doctorGarde;
 	}
 
-	public Date getDateGarde() {
+	public LocalDate getDateGarde() {
 		return dateGarde;
 	}
 
-	public void setDateGarde(Date dateGarde) {
+	public void setDateGarde(LocalDate dateGarde) {
 		this.dateGarde = dateGarde;
 	}
 

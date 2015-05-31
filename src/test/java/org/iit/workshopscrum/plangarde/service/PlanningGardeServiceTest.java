@@ -2,16 +2,16 @@ package org.iit.workshopscrum.plangarde.service;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
-import org.apache.commons.lang.time.DateUtils;
 import org.iit.workshopscrum.plangarde.model.Doctor;
+import org.iit.workshopscrum.plangarde.model.Holiday;
 import org.iit.workshopscrum.plangarde.model.ImpossibleToPlan;
 import org.iit.workshopscrum.plangarde.model.PlanningGarde;
 import org.iit.workshopscrum.plangarde.utils.GardeUtils;
+import org.joda.time.LocalDate;
 import org.junit.Test;
 
 public class PlanningGardeServiceTest {
@@ -22,9 +22,9 @@ public class PlanningGardeServiceTest {
 	public void test_generatePlanning_CaseStartDateNull() throws ImpossibleToPlan {
 
 		// Inputs
-		List<Doctor> doctors = new ArrayList<Doctor>();
-		Date startDate = null;
-		Date endDate = new Date();
+		Set<Doctor> doctors = new HashSet<Doctor>();
+		LocalDate startDate = null;
+		LocalDate endDate = new LocalDate();
 
 		// Call method under test
 		planningGardeService.generatePlanningGarde(doctors, startDate, endDate);
@@ -34,9 +34,9 @@ public class PlanningGardeServiceTest {
 	public void test_generatePlanning_CaseEndDateNull() throws ImpossibleToPlan {
 
 		// Inputs
-		List<Doctor> doctors = new ArrayList<Doctor>();
-		Date startDate = new Date();
-		Date endDate = null;
+		Set<Doctor> doctors = new HashSet<Doctor>();
+		LocalDate startDate = new LocalDate();
+		LocalDate endDate = null;
 
 		// Call method under test
 		planningGardeService.generatePlanningGarde(doctors, startDate, endDate);
@@ -46,10 +46,10 @@ public class PlanningGardeServiceTest {
 	public void test_generatePlanning_CaseEndDateBeforeStartDate() throws ImpossibleToPlan {
 
 		// Inputs
-		List<Doctor> doctors = new ArrayList<Doctor>();
+		Set<Doctor> doctors = new HashSet<Doctor>();
 		doctors.add(new Doctor("Mohamed"));
-		Date startDate = new Date();
-		Date endDate = DateUtils.addDays(startDate, -1);
+		LocalDate startDate = new LocalDate();
+		LocalDate endDate = startDate.minusDays(1);
 
 		// Call method under test
 		planningGardeService.generatePlanningGarde(doctors, startDate, endDate);
@@ -59,9 +59,9 @@ public class PlanningGardeServiceTest {
 	public void test_generatePlanning_CaseZeroDoctorAndOneDayPeriod() throws ImpossibleToPlan {
 
 		// Inputs
-		List<Doctor> doctors = new ArrayList<Doctor>();
-		Date startDate = new Date();
-		Date endDate = new Date();
+		Set<Doctor> doctors = new HashSet<Doctor>();
+		LocalDate startDate = new LocalDate();
+		LocalDate endDate = new LocalDate();
 
 		// Call method under test
 		planningGardeService.generatePlanningGarde(doctors, startDate, endDate);
@@ -71,14 +71,15 @@ public class PlanningGardeServiceTest {
 	public void test_generatePlanning_CaseOneDoctorAndOneDayPeriod() throws ImpossibleToPlan {
 
 		// Inputs
-		List<Doctor> doctors = new ArrayList<Doctor>();
+		Set<Doctor> doctors = new HashSet<Doctor>();
 		doctors.add(new Doctor("Mohamed"));
-		Date startDate = new Date();
-		Date endDate = DateUtils.addDays(startDate, 1);
+		LocalDate startDate = new LocalDate();
+		LocalDate endDate = startDate.plusDays(1);
 
 		// Call method under test
 		PlanningGarde planningGarde = planningGardeService.generatePlanningGarde(doctors, startDate, endDate);
 
+		// Display results
 		GardeUtils.displayPlanningGarde(planningGarde);
 		Map<Doctor, Integer> numberOfGardeForEachDoctor = GardeUtils.calculateNumberOfGardeForEachDoctor(doctors, planningGarde.getGardeList());
 		GardeUtils.displayNumberOfGardeForEachDoctor(numberOfGardeForEachDoctor);
@@ -92,14 +93,15 @@ public class PlanningGardeServiceTest {
 	public void test_generatePlanning_CaseOneDoctorAndTenDaysPeriod() throws ImpossibleToPlan {
 
 		// Inputs
-		List<Doctor> doctors = new ArrayList<Doctor>();
+		Set<Doctor> doctors = new HashSet<Doctor>();
 		doctors.add(new Doctor("Mohamed"));
-		Date startDate = new Date();
-		Date endDate = DateUtils.addDays(startDate, 10);
+		LocalDate startDate = new LocalDate();
+		LocalDate endDate = startDate.plusDays(10);
 
 		// Call method under test
 		PlanningGarde planningGarde = planningGardeService.generatePlanningGarde(doctors, startDate, endDate);
 
+		// Display results
 		GardeUtils.displayPlanningGarde(planningGarde);
 		Map<Doctor, Integer> numberOfGardeForEachDoctor = GardeUtils.calculateNumberOfGardeForEachDoctor(doctors, planningGarde.getGardeList());
 		GardeUtils.displayNumberOfGardeForEachDoctor(numberOfGardeForEachDoctor);
@@ -114,17 +116,18 @@ public class PlanningGardeServiceTest {
 	public void test_generatePlanning_CaseTwoDoctorsAndTenDaysPeriod() throws ImpossibleToPlan {
 
 		// Inputs
-		List<Doctor> doctors = new ArrayList<Doctor>();
+		Set<Doctor> doctors = new HashSet<Doctor>();
 		Doctor doctor1 = new Doctor("Mohamed");
 		doctors.add(doctor1);
 		Doctor doctor2 = new Doctor("Salah");
 		doctors.add(doctor2);
-		Date startDate = new Date();
-		Date endDate = DateUtils.addDays(startDate, 10);
+		LocalDate startDate = new LocalDate();
+		LocalDate endDate = startDate.plusDays(10);
 
 		// Call method under test
 		PlanningGarde planningGarde = planningGardeService.generatePlanningGarde(doctors, startDate, endDate);
 
+		// Display results
 		GardeUtils.displayPlanningGarde(planningGarde);
 		Map<Doctor, Integer> numberOfGardeForEachDoctor = GardeUtils.calculateNumberOfGardeForEachDoctor(doctors, planningGarde.getGardeList());
 		GardeUtils.displayNumberOfGardeForEachDoctor(numberOfGardeForEachDoctor);
@@ -135,4 +138,20 @@ public class PlanningGardeServiceTest {
 		assertEquals(numberOfGardeForEachDoctor.get(doctor2).intValue(), 5);
 	}
 
+	@Test(expected = ImpossibleToPlan.class)
+	public void test_generatePlanning_CaseOneDoctorOnHolidayEveryDay() throws ImpossibleToPlan {
+
+		// Inputs
+		LocalDate startDate = new LocalDate();
+		LocalDate endDate = startDate.plusDays(10);
+		Set<Holiday> holidays = new HashSet<Holiday>();
+		Holiday holiday = new Holiday(startDate, endDate);
+		holidays.add(holiday);
+		Set<Doctor> doctors = new HashSet<Doctor>();
+		Doctor doctor1 = new Doctor("Mohamed", holidays);
+		doctors.add(doctor1);
+
+		// Call method under test
+		planningGardeService.generatePlanningGarde(doctors, startDate, endDate);
+	}
 }

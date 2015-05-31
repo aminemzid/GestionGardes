@@ -3,15 +3,15 @@ package org.iit.workshopscrum.plangarde.utils;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-import org.apache.commons.lang.time.DateFormatUtils;
 import org.iit.workshopscrum.plangarde.model.Doctor;
 import org.iit.workshopscrum.plangarde.model.Garde;
 import org.iit.workshopscrum.plangarde.model.PlanningGarde;
 
 public class GardeUtils {
 
-	public static Map<Doctor, Integer> calculateNumberOfGardeForEachDoctor(List<Doctor> doctors, List<Garde> gardeList) {
+	public static Map<Doctor, Integer> calculateNumberOfGardeForEachDoctor(Set<Doctor> doctors, List<Garde> gardeList) {
 
 		Map<Doctor, Integer> numberOfGardeForEachDoctor = new HashMap<Doctor, Integer>();
 
@@ -41,7 +41,7 @@ public class GardeUtils {
 		System.out.println("######################### START DISPLAYING PLANNING GARDE #########################");
 		int gardeNumber = 1;
 		for (Garde garde : planningGarde.getGardeList()) {
-			System.out.println("Garde " + gardeNumber + " : DATE = " + DateFormatUtils.format(garde.getDateGarde(), "E dd/MM/yyyy") + " / DOCTOR = "
+			System.out.println("Garde " + gardeNumber + " : DATE = " + garde.getDateGarde().toString("E dd/MM/yyyy") + " / DOCTOR = "
 					+ garde.getDoctorGarde().getName());
 			gardeNumber++;
 		}

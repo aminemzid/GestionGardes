@@ -1,11 +1,11 @@
 package org.iit.workshopscrum.plangarde.model;
 
-import java.util.Calendar;
+import org.joda.time.DateTimeConstants;
 
 public enum DayWeek {
 
-	MONDAY(Calendar.MONDAY), TUESDAY(Calendar.TUESDAY), WEDNESDAY(Calendar.WEDNESDAY), THURSDAY(Calendar.THURSDAY), FRIDAY(Calendar.FRIDAY), SATURDAY(
-			Calendar.SATURDAY), SUNDAY(Calendar.SUNDAY);
+	MONDAY(DateTimeConstants.MONDAY), TUESDAY(DateTimeConstants.TUESDAY), WEDNESDAY(DateTimeConstants.WEDNESDAY), THURSDAY(DateTimeConstants.THURSDAY), FRIDAY(
+			DateTimeConstants.FRIDAY), SATURDAY(DateTimeConstants.SATURDAY), SUNDAY(DateTimeConstants.SUNDAY);
 
 	private int day;
 
