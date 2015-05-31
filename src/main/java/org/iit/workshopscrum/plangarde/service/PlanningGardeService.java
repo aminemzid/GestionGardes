@@ -16,6 +16,8 @@ import org.iit.workshopscrum.plangarde.model.PlanningGarde;
 
 public class PlanningGardeService {
 
+	// TODO change List into Set to avoid duplicate items
+
 	public PlanningGarde generatePlanningGarde(List<Doctor> doctors, Date startDate, Date endDate) throws ImpossibleToPlan {
 
 		if (startDate == null || endDate == null) {

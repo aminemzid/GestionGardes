@@ -4,14 +4,18 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang.time.DateUtils;
 import org.iit.workshopscrum.plangarde.model.Doctor;
+import org.iit.workshopscrum.plangarde.model.Holiday;
 import org.iit.workshopscrum.plangarde.model.ImpossibleToPlan;
 import org.iit.workshopscrum.plangarde.model.PlanningGarde;
 import org.iit.workshopscrum.plangarde.utils.GardeUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class PlanningGardeServiceTest {
@@ -135,4 +139,21 @@ public class PlanningGardeServiceTest {
 		assertEquals(numberOfGardeForEachDoctor.get(doctor2).intValue(), 5);
 	}
 
+	@Ignore
+	@Test(expected = ImpossibleToPlan.class)
+	public void test_generatePlanning_CaseOneDoctorOnHolidayEveryDay() throws ImpossibleToPlan {
+
+		// Inputs
+		Date startDate = new Date();
+		Date endDate = DateUtils.addDays(startDate, 10);
+		Set<Holiday> holidays = new HashSet<Holiday>();
+		Holiday holiday = new Holiday(startDate, endDate);
+		holidays.add(holiday);
+		List<Doctor> doctors = new ArrayList<Doctor>();
+		Doctor doctor1 = new Doctor("Mohamed", holidays);
+		doctors.add(doctor1);
+
+		// Call method under test
+		planningGardeService.generatePlanningGarde(doctors, startDate, endDate);
+	}
 }

@@ -8,6 +8,7 @@ public class Doctor {
 
 	private Set<Holiday> holidays;
 
+	// TODO not used for the moment
 	private Set<DayWeek> preferredGardeDays;
 
 	public Doctor(String name, Set<Holiday> holidays) {
