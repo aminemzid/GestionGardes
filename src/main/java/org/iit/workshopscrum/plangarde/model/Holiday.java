@@ -2,14 +2,10 @@ package org.iit.workshopscrum.plangarde.model;
 
 import org.joda.time.LocalDate;
 
-import com.sun.istack.internal.NotNull;
-
 public class Holiday {
 
-	@NotNull
 	private LocalDate startDate;
 
-	@NotNull
 	private LocalDate endDate;
 
 	// TODO Add validation startDate < endDate
@@ -36,7 +32,6 @@ public class Holiday {
 		return startDate;
 	}
 
-	@NotNull
 	public LocalDate getEndDate() {
 		return endDate;
 	}
